@@ -17,7 +17,7 @@
 }
 
 .addition-title {
-    color: #5c7cfa;
+    color: #920c0c;
     margin-bottom: 2rem;
 }
 
@@ -32,7 +32,7 @@
 .number-input {
     padding: 0.5rem;
     border-radius: 5px;
-    border: 2px solid #5c7cfa;
+    border: 2px solid #dafa5c;
     width: calc(50% - 1rem);
     outline: none;
     text-align: center;
@@ -40,7 +40,7 @@
 
 .plus-icon {
     font-size: 2rem;
-    color: #5c7cfa;
+    color: #a01a27;
 }
 
 .addition-button {
@@ -48,7 +48,7 @@
     width: 100%;
     padding: 1rem;
     margin-top: 1rem;
-    background-color: #5c7cfa;
+    background-color: #020d36;
     color: #fff;
     border: none;
     border-radius: 5px;
