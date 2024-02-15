@@ -1,0 +1,47 @@
+.navbar-custom {
+    background-color: #343a40;
+    /* Bootstrap's dark theme color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for depth */
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: bold;
+    color: #f8f9fa;
+    /* Light color for the brand text */
+}
+
+.navbar-custom .nav-link {
+    color: #f8f9fa;
+    /* Light color for navigation links */
+    margin-right: 1rem;
+    /* Adds distance between navigation links */
+    transition: color 0.3s ease;
+    /* Transition for hover effect */
+}
+
+.navbar-custom .nav-link:hover {
+    color: #adb5bd;
+    /* A lighter grey on hover for a nice effect */
+}
+
+.navbar-custom .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+    /* Visible toggle button */
+}
+
+.navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Adjust the nav items on smaller screens */
+@media (max-width: 992px) {
+    .navbar-custom .nav-item {
+        margin: 0.5rem 0;
+    }
+
+    .navbar-custom .nav-link {
+        margin-right: 0;
+        /* Reset margin on smaller screens */
+    }
+}

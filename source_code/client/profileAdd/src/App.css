@@ -1,20 +1,40 @@
+/* Reset default margin and padding for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('../public/bg2');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+
+/* Center content within the page */
 .App {
   text-align: center;
 }
 
+/* Styles for the logo */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
+/* Animation for the logo */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
+/* Header styles */
 .App-header {
-  background-color: #282c34;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Add a semi-transparent background color to improve readability */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,14 +44,17 @@
   color: white;
 }
 
+/* Link styles */
 .App-link {
   color: #61dafb;
 }
 
+/* Animation for the logo spin */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
