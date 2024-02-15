@@ -32,7 +32,7 @@
 .number-input {
     padding: 0.5rem;
     border-radius: 5px;
-    border: 2px solid #dafa5c;
+    border: 2px solid #03590c;
     width: calc(50% - 1rem);
     outline: none;
     text-align: center;
@@ -58,7 +58,7 @@
 }
 
 .addition-button:hover {
-    background-color: #4a6fa5;
+    background-color: #b6212d;
     transform: translateY(-2px);
 }
 
@@ -70,7 +70,7 @@
 }
 
 .result-value {
-    color: #33adff;
+    color: #053555;
     font-weight: bold;
 }
 
