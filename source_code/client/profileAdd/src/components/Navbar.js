@@ -1,14 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom"; // Import NavLink instead of Link
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'; // Make sure you create a Navbar.css file in the same directory as your Navbar component
 
 const Navbar = () => {
+    const location = useLocation();
+
     return (
         <nav className="navbar navbar-expand-lg navbar-custom">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
-                    <img src="/logo.jpg" alt="Logo" style={{ height: '30px' }} />
+                    <img src="/logo.jpg" alt="Logo" style={{ height: '30px', marginRight: '10px' }} />
                     MyProfileApp
                 </Link>
                 <button
@@ -25,10 +27,12 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">Profile</Link>
+                            {/* Use NavLink instead of Link */}
+                            <NavLink className="nav-link" to="/" activeClassName="active">Profile</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/addition">Addition</Link>
+                        <li className="nav-item" style={{ marginLeft: '10px' }}>
+                            {/* Use NavLink instead of Link */}
+                            <NavLink className="nav-link" to="/addition" activeClassName="active">Addition</NavLink>
                         </li>
                     </ul>
                 </div>

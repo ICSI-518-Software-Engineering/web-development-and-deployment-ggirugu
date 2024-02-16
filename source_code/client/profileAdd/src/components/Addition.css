@@ -13,8 +13,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
+    /* Increased max-width to make it wider */
+    margin: 0 auto;
+    /* Center the card horizontally */
+    margin-top: 5vh;
+    /* Adjusted margin-top to fit it to the top */
 }
+
 
 .addition-title {
     color: #920c0c;
