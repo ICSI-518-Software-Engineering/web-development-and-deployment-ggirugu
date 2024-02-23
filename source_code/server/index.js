@@ -7,6 +7,7 @@ const port = 8080;
 // Use CORS and JSON body parser middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/add', (req, res) => {
     // Destructure the numbers from req.body

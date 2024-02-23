@@ -10,7 +10,7 @@ const Addition = () => {
 
     const handleAddition = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/add', { number1, number2 });
+            const response = await axios.post('http://ec2-44-202-219-47.compute-1.amazonaws.com:9000/add', { number1, number2 });
             setBackendResult(response.data.result);
             setFrontendResult(Number(number1) + Number(number2));
         } catch (error) {
