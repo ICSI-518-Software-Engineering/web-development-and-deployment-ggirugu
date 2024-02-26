@@ -7,7 +7,7 @@ Hello! My name is Giridhar Sai, and I am a Master's student in Computer Science 
 
 ## Project Overview
 
-This project is a React application built using the MERN stack (MongoDB, Express.js, React, Node.js). It showcases a comprehensive set of features that demonstrate my proficiency in full-stack development, including a responsive UI, robust backend services, and a seamless integration of the frontend and backend.
+This project is a React application built using the MERN stack (Express.js, React, Node.js). It showcases a comprehensive set of features that demonstrate my proficiency in full-stack development, including a responsive UI, robust backend services, and a seamless integration of the frontend and backend.
 
 ## Experience with ChatGPT
 
