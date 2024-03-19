@@ -1,11 +1,9 @@
 import React from "react";
-import { Link, NavLink, useLocation } from "react-router-dom"; // Import NavLink instead of Link
+import { Link, NavLink } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'; // Make sure you create a Navbar.css file in the same directory as your Navbar component
 
 const Navbar = () => {
-    const location = useLocation();
-
     return (
         <nav className="navbar navbar-expand-lg navbar-custom">
             <div className="container-fluid">
@@ -27,12 +25,16 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            {/* Use NavLink instead of Link */}
                             <NavLink className="nav-link" to="/" activeClassName="active">Profile</NavLink>
                         </li>
                         <li className="nav-item" style={{ marginLeft: '10px' }}>
-                            {/* Use NavLink instead of Link */}
                             <NavLink className="nav-link" to="/addition" activeClassName="active">Addition</NavLink>
+                        </li>
+                        <li className="nav-item" style={{ marginLeft: '10px' }}>
+                            <NavLink className="nav-link" to="/catalog" activeClassName="active">Catalog</NavLink>
+                        </li>
+                        <li className="nav-item" style={{ marginLeft: '10px' }}>
+                            <NavLink className="nav-link" to="/busy-api" activeClassName="active">Busy API</NavLink>
                         </li>
                     </ul>
                 </div>
