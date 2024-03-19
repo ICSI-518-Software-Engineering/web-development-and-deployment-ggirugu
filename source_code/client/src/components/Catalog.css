@@ -99,9 +99,40 @@ input {
     background-color: #357a38;
 }
 
-/* Add Product Button */
+.catalog-heading-container {
+    display: flex;
+    justify-content: center;
+    /* Centers the content horizontally */
+    align-items: center;
+    /* Aligns items vertically */
+    position: relative;
+    /* Establishes a positioning context for the absolute button */
+    margin-bottom: 20px;
+}
+
+.catalog-heading {
+    /* Your existing styles for the heading, with some additional styles */
+    font-size: 2em;
+    /* Example to make the font larger */
+    color: #333;
+    /* Dark grey color */
+    font-weight: bold;
+    /* Make the text bold */
+    flex-grow: 1;
+    /* Makes the heading expand to take up any extra space */
+    text-align: center;
+    /* Ensures the text is centered even if the flex item is larger than the content */
+}
+
 .add-product-button {
-    margin: 10px;
+    position: absolute;
+    /* Position it absolutely in relation to the relative parent */
+    right: 0;
+    /* Align to the right */
+    top: 50%;
+    /* Start at the vertical center */
+    transform: translateY(-50%);
+    /* Shift it up by half its height to center it vertically */
     padding: 8px 16px;
     background-color: #4CAF50;
     color: white;
@@ -114,6 +145,7 @@ input {
 .add-product-button:hover {
     background-color: #357a38;
 }
+
 
 /* Modal Styles */
 .modal {

@@ -75,9 +75,10 @@ const Catalog = () => {
 
     return (
         <div className="catalog">
-            <h1 className="catalog-heading">Bouquet Catalog</h1>
-            <button className="add-product-button" onClick={toggleModal}><FaPlus /> Add Product</button>
-
+            <div class="catalog-heading-container">
+                <h2 class="catalog-heading">Bouquet Catalog</h2>
+                <button className="add-product-button" onClick={toggleModal}><FaPlus /> Add Product</button>
+            </div>
             {showModal && (
                 <div className="modal">
                     <div className="modal-content">
