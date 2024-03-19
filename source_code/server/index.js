@@ -1,33 +1,113 @@
+require('dotenv').config({ path: './server.env' });
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+const AWS = require('aws-sdk');
 const path = require('path');
-
+console.log(process.env.MONGO_URI);
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage }); // Destination directory for uploaded files
 
 const app = express();
 const port = 8080;
 
-// Use CORS and JSON body parser middleware
+// MongoDB setup
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const Product = mongoose.model('Product', new mongoose.Schema({
+    name: String,
+    price: Number,
+    quantity: Number,
+    imageUrl: String
+}));
+
+// AWS S3 setup
+AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION
+});
+const s3 = new AWS.S3();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'build')));
 
+// Addition API
 app.post('/add', (req, res) => {
-    // Destructure the numbers from req.body
     const { number1, number2 } = req.body;
-
-    // Perform the addition
     const result = Number(number1) + Number(number2);
-
-    // Send the result back as JSON
     res.json({ result });
 });
 
+// Endpoint for generating pre-signed URL
+app.get('/generate-presigned-url', (req, res) => {
+    const params = {
+        Bucket: process.env.S3_BUCKET,
+        Key: `${process.env.S3_FOLDER}/${Date.now()}_${req.query.fileName}`,
+        Expires: 60, // URL expiry time
+        ContentType: req.query.fileType,
+        ACL: 'public-read'
+    };
+
+    s3.getSignedUrl('putObject', params, (err, url) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send(err);
+        }
+        res.json({ url });
+    });
+});
+
+app.post('/upload-image', upload.single('image'), async (req, res) => {
+    try {
+        // Check if req.file is defined
+        if (!req.file) {
+            return res.status(400).json({ error: 'No file uploaded' });
+        }
+
+        console.log('File information:', req.file);
+
+        // Ensure req.file.buffer is defined and contains the file buffer
+        if (!req.file.buffer || !Buffer.isBuffer(req.file.buffer)) {
+            return res.status(400).json({ error: 'File buffer is missing or invalid' });
+        }
+
+        const params = {
+            Bucket: process.env.S3_BUCKET,
+            Key: `${process.env.S3_FOLDER}/${Date.now()}_${req.file.originalname}`,
+            Body: req.file.buffer, // Image file buffer
+            ACL: 'public-read' // Make uploaded object publicly accessible
+        };
+
+        // Upload image to S3
+        const data = await s3.upload(params).promise();
+        const imageUrl = data.Location;
+
+        res.json({ imageUrl }); // Return URL of uploaded image
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        res.status(500).json({ error: 'Error uploading image' });
+    }
+});
+
+
+// Endpoint for adding a product
+app.post('/add-product', async (req, res) => {
+    try {
+        const { name, price, quantity, imageUrl } = req.body;
+        const product = new Product({ name, price, quantity, imageUrl });
+        await product.save();
+        res.status(201).json(product);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello from Product Management Server!');
 });
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
-
-
