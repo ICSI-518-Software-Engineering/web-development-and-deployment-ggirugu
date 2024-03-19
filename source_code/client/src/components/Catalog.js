@@ -22,8 +22,10 @@ const Catalog = () => {
     ]); // Initialize with an empty array or your items
     const [editItemId, setEditItemId] = useState(null);
     const [tempItem, setTempItem] = useState({ quantity: 0, price: 0 });
-    const [newProduct, setNewProduct] = useState({ name: '', quantity: '', price: '', imageFile: null });
-    const [showAddForm, setShowAddForm] = useState(false);
+    const [newProduct, setNewProduct] = useState({ name: '', quantity: '', price: '', imageUrl: null });
+
+    const [showModal, setShowModal] = useState(false);
+
 
     const handleDelete = (id) => {
         setItems(items.filter(item => item.id !== id));
@@ -47,6 +49,8 @@ const Catalog = () => {
         setTempItem({ ...tempItem, [field]: e.target.value });
     };
 
+    const toggleModal = () => setShowModal(!showModal);
+
     const handleNewProductChange = (e) => {
         setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
     };
@@ -55,7 +59,7 @@ const Catalog = () => {
         if (e.target.files && e.target.files[0]) {
             let reader = new FileReader();
             reader.onload = (event) => {
-                setNewProduct({ ...newProduct, imageFile: event.target.result });
+                setNewProduct({ ...newProduct, imageUrl: event.target.result });
             };
             reader.readAsDataURL(e.target.files[0]);
         }
@@ -64,29 +68,29 @@ const Catalog = () => {
     const handleAddProduct = (e) => {
         e.preventDefault();
         const newId = items.length > 0 ? Math.max(...items.map(item => item.id)) + 1 : 1;
-        setItems([...items, { ...newProduct, id: newId, imageUrl: newProduct.imageFile }]);
-        setNewProduct({ name: '', quantity: '', price: '', imageFile: null });
-        setShowAddForm(false);
-    };
-
-    const handleAddProductToggle = () => {
-        setShowAddForm(!showAddForm);
+        setItems([...items, { ...newProduct, id: newId }]);
+        setNewProduct({ name: '', quantity: '', price: '', imageUrl: null });
+        toggleModal();
     };
 
     return (
         <div className="catalog">
             <h1 className="catalog-heading">Bouquet Catalog</h1>
-            <button className="toggle-add-form-btn" onClick={handleAddProductToggle}>
-                {showAddForm ? 'Close' : 'Add Product'} <FaPlus />
-            </button>
-            {showAddForm && (
-                <form className="add-product-form" onSubmit={handleAddProduct}>
-                    <input type="text" name="name" placeholder="Product Name" value={newProduct.name} onChange={handleNewProductChange} required />
-                    <input type="number" name="quantity" placeholder="Quantity" value={newProduct.quantity} onChange={handleNewProductChange} required />
-                    <input type="number" name="price" placeholder="Price" value={newProduct.price} onChange={handleNewProductChange} required />
-                    <input type="file" onChange={handleImageChange} required />
-                    <button type="submit" className="add-btn">Add Product</button>
-                </form>
+            <button className="add-product-button" onClick={toggleModal}><FaPlus /> Add Product</button>
+
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close-button" onClick={toggleModal}><FaTimes /></span>
+                        <form onSubmit={handleAddProduct}>
+                            <input type="text" name="name" placeholder="Product Name" value={newProduct.name} onChange={handleNewProductChange} required />
+                            <input type="number" name="quantity" placeholder="Quantity" value={newProduct.quantity} onChange={handleNewProductChange} required />
+                            <input type="number" name="price" placeholder="Price" value={newProduct.price} onChange={handleNewProductChange} required />
+                            <input type="file" onChange={handleImageChange} required />
+                            <button type="submit" className="submit-btn">Add Product</button>
+                        </form>
+                    </div>
+                </div>
             )}
             <div className="catalog-grid">
                 {items.map(item => (
@@ -94,7 +98,7 @@ const Catalog = () => {
                         <button className="delete-btn" onClick={() => handleDelete(item.id)}>
                             <FaTrash />
                         </button>
-                        <img src={item.imageFile || 'placeholder.png'} alt={item.name} />
+                        <img src={item.imageUrl || 'placeholder.png'} alt={item.name} />
                         <h2>{item.name}</h2>
                         {editItemId === item.id ? (
                             <div>
