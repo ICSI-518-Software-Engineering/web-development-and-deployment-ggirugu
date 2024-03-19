@@ -37,4 +37,11 @@ The ability to get immediate help on coding issues, UI enhancements, and backend
 - **Port** : 8080
 - **IP Address of EC2 Instance**:44.202.219.47
 - **GitHub Repository**: https://github.com/ICSI-518-Software-Engineering/web-development-and-deployment-ggirugu
+  
+## Steps to run in local 
+1.open client directory install node_modules, axios
+2.Change the url to local host of server.
+3.npm start 
+4.open server and install express, node.js
+5.node index.js
 
