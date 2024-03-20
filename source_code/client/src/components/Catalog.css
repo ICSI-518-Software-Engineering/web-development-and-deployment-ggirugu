@@ -4,11 +4,19 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+
 }
 
 .catalog-heading {
     margin-bottom: 20px;
+    color: white;
 }
+
+.catalog-item h2,
+.catalog-item p {
+    color: white;
+}
+
 
 .catalog-grid {
     display: grid;
