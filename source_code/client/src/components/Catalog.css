@@ -146,6 +146,29 @@ input {
     background-color: #357a38;
 }
 
+.success-message,
+.error-message {
+    display: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.success-message.show,
+.error-message.show {
+    display: block;
+}
+
+.success-message {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.error-message {
+    background-color: #f44336;
+    color: white;
+}
+
 
 /* Modal Styles */
 .modal {
@@ -236,4 +259,11 @@ input {
 
 .modal-content button:hover {
     background-color: #005f80;
+}
+
+.empty-inventory-message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #666;
 }

@@ -92,6 +92,17 @@ app.post('/upload-image', upload.single('image'), async (req, res) => {
 });
 
 
+app.get('/products', async (req, res) => {
+    try {
+        // Fetch all products from the database
+        const products = await Product.find();
+        res.json(products); // Send the products as a JSON response
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ error: 'Error fetching products' });
+    }
+});
+
 // Endpoint for adding a product
 app.post('/add-product', async (req, res) => {
     try {
@@ -103,6 +114,49 @@ app.post('/add-product', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+app.delete('/products/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Check if the product exists
+        const product = await Product.findById(id);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        // If the product exists, delete it
+        await Product.findByIdAndDelete(id);
+        res.json({ message: 'Product deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        res.status(500).json({ error: 'Error deleting product' });
+    }
+});
+
+// Endpoint for updating a product
+app.put('/product/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, price, quantity } = req.body;
+
+        // Check if the product exists
+        const product = await Product.findById(id);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        // Update the product
+        product.name = name;
+        product.price = price;
+        product.quantity = quantity;
+        await product.save();
+
+        res.json(product); // Return the updated product
+    } catch (error) {
+        console.error('Error updating product:', error);
+        res.status(500).json({ error: 'Error updating product' });
+    }
+});
+
 
 app.get('/', (req, res) => {
     res.send('Hello from Product Management Server!');
