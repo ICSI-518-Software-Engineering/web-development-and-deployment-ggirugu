@@ -1,0 +1,71 @@
+body {
+    background-color: #f4f4f4;
+    /* Set background color to a light gray */
+    font-family: Arial, sans-serif;
+    /* Set font family */
+}
+
+.container {
+    background-color: #fff;
+    /* Set background color of container to white */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Add shadow for a card-like effect */
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group .form-control {
+    display: flex;
+    width: calc(100% - 90px);
+    /* Set a smaller width for the input */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-group .btn {
+    width: 90px;
+    /* Set width for the button */
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    /* Add spacing between table rows */
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    /* Increase padding for better spacing */
+    text-align: left;
+    /* Align text to the left */
+}
+
+.table th {
+    background-color: #007bff;
+    /* Set header background color */
+    color: #fff;
+    /* Set header text color */
+    border: 1px solid #dee2e6;
+}
+
+.table tbody tr {
+    background-color: #fff;
+    /* Set background color for table rows */
+    transition: background-color 0.3s;
+    /* Add transition effect on hover */
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+    /* Change background color on hover */
+}

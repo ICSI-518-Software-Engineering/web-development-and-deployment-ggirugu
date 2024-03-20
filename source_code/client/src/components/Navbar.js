@@ -34,7 +34,7 @@ const Navbar = () => {
                             <NavLink className="nav-link" to="/catalog" activeClassName="active">Catalog</NavLink>
                         </li>
                         <li className="nav-item" style={{ marginLeft: '10px' }}>
-                            <NavLink className="nav-link" to="/busy-api" activeClassName="active">Busy API</NavLink>
+                            <NavLink className="nav-link" to="/generate" activeClassName="active">Search</NavLink>
                         </li>
                     </ul>
                 </div>
