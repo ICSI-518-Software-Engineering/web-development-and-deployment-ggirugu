@@ -11,7 +11,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }); // Destination directory for uploaded files
 
 const app = express();
-const port = 8081;
+const port = 8080;
 
 // MongoDB setup
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
