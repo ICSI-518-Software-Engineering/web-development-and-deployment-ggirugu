@@ -1,4 +1,7 @@
 .navbar-custom {
+    top: 0;
+    z-index: 500;
+    position: sticky;
     background-color: #343a40;
     /* Bootstrap's dark theme color */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

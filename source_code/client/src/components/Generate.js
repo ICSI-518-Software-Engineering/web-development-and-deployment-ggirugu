@@ -6,9 +6,11 @@ const Generate = () => {
     const [input, setInput] = useState('');
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false); // Added loading state
 
     const handleSearch = async () => {
         try {
+            setLoading(true); // Set loading state to true when starting the search
             const response = await axios.post(
                 'https://trains.p.rapidapi.com/',
                 { search: input },
@@ -26,6 +28,8 @@ const Generate = () => {
             console.error(error);
             setError('An error occurred while fetching data.');
             setResponseData(null);
+        } finally {
+            setLoading(false); // Set loading state to false after the search is complete
         }
     };
 
@@ -47,6 +51,7 @@ const Generate = () => {
                     <button className="btn btn-primary" type="button" onClick={handleSearch}>Search</button>
                 </div>
                 {error && <div className="alert alert-danger mt-3">{error}</div>}
+                {loading && <div className="mt-4 text-center">Loading...</div>} {/* Show loading indicator */}
                 {responseData && (
                     <table className="table mt-4">
                         <thead>
