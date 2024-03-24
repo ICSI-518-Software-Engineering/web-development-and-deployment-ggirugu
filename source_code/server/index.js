@@ -6,6 +6,7 @@ const AWS = require('aws-sdk');
 const path = require('path');
 console.log(process.env.MONGO_URI);
 const multer = require('multer');
+const { request } = require('http');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }); // Destination directory for uploaded files
 
@@ -162,6 +163,11 @@ app.get('/', (req, res) => {
     res.send('Hello from Product Management Server!');
 });
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build'), 'index.html');
+});
+
 app.listen(port, () => {
+
     console.log(`Server running on http://localhost:${port}`);
 });
