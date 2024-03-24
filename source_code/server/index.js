@@ -11,7 +11,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }); // Destination directory for uploaded files
 
 const app = express();
-const port = 8080;
+const port = 8081;
 
 // MongoDB setup
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -163,8 +163,8 @@ app.get('/', (req, res) => {
     res.send('Hello from Product Management Server!');
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build'), 'index.html');
+app.get("*", (_req, res) => {
+    res.sendFile(path.join("build", "index.html"));
 });
 
 app.listen(port, () => {
