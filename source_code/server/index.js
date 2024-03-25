@@ -163,9 +163,9 @@ app.get('/', (req, res) => {
     res.send('Hello from Product Management Server!');
 });
 
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(path.join(__dirname, 'build'), 'index.html'));
-// });
+app.get("*", (req, res) => {
+    res.sendFile(path.join(path.join(__dirname, 'build'), 'index.html'));
+});
 
 app.listen(port, () => {
 
