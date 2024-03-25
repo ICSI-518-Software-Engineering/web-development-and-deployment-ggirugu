@@ -22,26 +22,26 @@ This project is a React application built using the MERN stack (Express.js, Reac
 ### Description of My ChatGPT Experience
 During the development of this project, I utilized ChatGPT as a valuable resource. ChatGPT assisted me in various aspects of the project, including:
 
-- Formulating the basic code structure for both frontend and backend components.
-- Enhancing the user interface for a better user experience.
-- Troubleshooting and resolving errors that emerged during development.
-- Setting up and configuring the backend for efficient data handling and processing.
 
+- Troubleshooting and resolving errors that emerged during development.
+- Setting up and configuring the database connection.
+- Getting the commands for linux while deploying.
+ 
 My experience with ChatGPT has been excellent. It served as a reliable assistant, providing quick and informative responses that greatly aided in the development process. 
-The ability to get immediate help on coding issues, UI enhancements, and backend setup was immensely beneficial, making the development journey smoother and more efficient.
+The ability to get immediate help on coding issues, UI enhancements, database setup and backend setup was immensely beneficial, making the development journey smoother and more efficient.
 
 
 ## Deployment Details
 
-- **Web Address**:(http://ec2-44-202-219-47.compute-1.amazonaws.com:8080/)
+- **Web Address**:(http://ec2-54-242-35-201.compute-1.amazonaws.com:8080//)
 - **Port** : 8080
-- **IP Address of EC2 Instance**:44.202.219.47
+- **IP Address of EC2 Instance**:54.242.35.201
 - **GitHub Repository**: https://github.com/ICSI-518-Software-Engineering/web-development-and-deployment-ggirugu
   
 ## Steps to run in local 
 1.open client directory install node_modules, axios
 2.Change the url to local host of server.
 3.npm start 
-4.open server and install express, node.js
+4.open server and install express, node.js, mongose
 5.node index.js
 
