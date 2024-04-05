@@ -206,6 +206,43 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+app.post('/signin', async (req, res) => {
+    try {
+        const { studentId, password } = req.body;
+
+        // Basic validation
+        if (!studentId || !password) {
+            return res.status(400).json({ message: 'Student ID and password are required.' });
+        }
+
+        // Find the user by studentId
+        const user = await User.findOne({ studentId });
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid credentials.' });
+        }
+
+        // Check if the password is correct
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid credentials.' });
+        }
+
+        // Return user data (excluding the password)
+        const userData = {
+            studentId: user.studentId,
+            studentName: user.studentName,
+            email: user.email
+            // Add other fields as necessary
+        };
+
+        res.json(userData);
+    } catch (error) {
+        console.error('Error in signin:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 
 app.get('/', (req, res) => {
     res.send('Hello from Product Management Server!');
