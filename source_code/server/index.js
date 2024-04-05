@@ -158,6 +158,32 @@ app.put('/product/:id', async (req, res) => {
     }
 });
 
+app.post('/signup', async (req, res) => {
+    try {
+        const { studentName, studentId, email, password } = req.body;
+
+        // Basic validation
+        if (!studentName || !studentId || !email || !password) {
+            return res.status(400).json({ message: 'All fields are required.' });
+        }
+
+        // Check if a user with the given studentId or email already exists
+        const existingUser = await User.findOne({ $or: [{ studentId }, { email }] });
+        if (existingUser) {
+            return res.status(400).json({ message: 'A user with the given ID or email already exists.' });
+        }
+
+        // Create a new user and save to the database
+        const newUser = new User({ studentName, studentId, email, password });
+        await newUser.save();
+
+        res.status(201).json({ message: 'User registered successfully!' });
+    } catch (error) {
+        console.error('Error in signup:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 
 app.get('/', (req, res) => {
     res.send('Hello from Product Management Server!');

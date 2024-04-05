@@ -25,7 +25,7 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/" activeClassName="active">Profile</NavLink>
+                            <NavLink className="nav-link" to="/profile" activeClassName="active">Profile</NavLink>
                         </li>
                         <li className="nav-item" style={{ marginLeft: '10px' }}>
                             <NavLink className="nav-link" to="/addition" activeClassName="active">Addition</NavLink>
