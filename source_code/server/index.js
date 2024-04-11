@@ -12,9 +12,32 @@ const upload = multer({ storage: storage }); // Destination directory for upload
 
 const app = express();
 const port = 8080;
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+// Define the User schema
+const userSchema = new mongoose.Schema({
+    studentName: { type: String, required: true },
+    studentId: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
+});
+
+// Pre-save hook to hash password
+userSchema.pre('save', function (next) {
+    if (!this.isModified('password')) return next();
+    bcrypt.hash(this.password, saltRounds, (err, hash) => {
+        if (err) return next(err);
+        this.password = hash;
+        next();
+    });
+});
+
+// Compile model from schema
+const User = mongoose.model('User', userSchema);
 
 // MongoDB setup
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_URI);
 const Product = mongoose.model('Product', new mongoose.Schema({
     name: String,
     price: Number,
@@ -157,6 +180,68 @@ app.put('/product/:id', async (req, res) => {
         res.status(500).json({ error: 'Error updating product' });
     }
 });
+app.post('/signup', async (req, res) => {
+    try {
+        const { studentName, studentId, email, password } = req.body;
+
+        // Basic validation
+        if (!studentName || !studentId || !email || !password) {
+            return res.status(400).json({ message: 'All fields are required.' });
+        }
+
+        // Check if a user with the given studentId or email already exists
+        const existingUser = await User.findOne({ $or: [{ studentId }, { email }] });
+        if (existingUser) {
+            return res.status(400).json({ message: 'A user with the given ID or email already exists.' });
+        }
+
+        // Create a new user and save to the database
+        const newUser = new User({ studentName, studentId, email, password });
+        await newUser.save();
+
+        res.status(201).json({ message: 'User registered successfully!' });
+    } catch (error) {
+        console.error('Error in signup:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+app.post('/signin', async (req, res) => {
+    try {
+        const { studentId, password } = req.body;
+
+        // Basic validation
+        if (!studentId || !password) {
+            return res.status(400).json({ message: 'Student ID and password are required.' });
+        }
+
+        // Find the user by studentId
+        const user = await User.findOne({ studentId });
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid credentials.' });
+        }
+
+        // Check if the password is correct
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid credentials.' });
+        }
+
+        // Return user data (excluding the password)
+        const userData = {
+            studentId: user.studentId,
+            studentName: user.studentName,
+            email: user.email
+            // Add other fields as necessary
+        };
+
+        res.json(userData);
+    } catch (error) {
+        console.error('Error in signin:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 
 app.post('/signup', async (req, res) => {
     try {

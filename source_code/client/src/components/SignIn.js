@@ -1,45 +1,56 @@
-// SignIn.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './SignIn.css'; // Ensure this path is correct
 
 function SignIn() {
-  const [username, setUsername] = useState('');
+  const [studentId, setStudentId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Perform your sign-in logic here
-    if (username === 'testuser' && password === 'password') { // Replace with actual validation
-      localStorage.setItem('userToken', 'yourToken'); // Set the token upon successful login
-      navigate('/profile'); // Navigate to the profile page upon successful login
-    } else {
-      alert('Invalid credentials');
+
+    try {
+      const response = await fetch('http://localhost:8080/signin', { // Adjust the URL as needed
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ studentId, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        localStorage.setItem('userData', JSON.stringify(data)); // Storing user data
+        navigate('/profile'); // Navigate to the profile page
+      } else {
+        alert(data.message || 'Invalid credentials');
+      }
+    } catch (error) {
+      console.error('SignIn error:', error);
+      alert('An error occurred while signing in');
     }
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'purple' }}>
-      <div style={{ padding: 20, borderRadius: 10, background: 'white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-        <h2>Welcome!</h2>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className="signin-container">
+      <div className="signin-box">
+        <h2>Sign In</h2>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
-            style={{ margin: '10px 0', padding: '10px' }}
+            value={studentId}
+            onChange={(e) => setStudentId(e.target.value)}
+            placeholder="Student ID"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            style={{ margin: '10px 0', padding: '10px' }}
           />
-          <button type="submit" style={{ padding: '10px', background: 'orange', color: 'white', border: 'none', borderRadius: 5 }}>
-            Sign In
-          </button>
+          <button type="submit" className="signin-button">Sign In</button>
         </form>
       </div>
     </div>

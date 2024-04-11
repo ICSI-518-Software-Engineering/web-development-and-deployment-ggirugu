@@ -6,7 +6,7 @@ import Addition from "./components/Addition";
 import Catalog from "./components/Catalog";
 import Generate from "./components/Generate";
 import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import SignUp from "./components/SignUp.js";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
