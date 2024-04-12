@@ -11,7 +11,7 @@ function SignIn() {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/signin', { // Adjust the URL as needed
+      const response = await fetch('http://localhost:8080/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,6 +23,7 @@ function SignIn() {
 
       if (response.status === 200) {
         localStorage.setItem('userData', JSON.stringify(data)); // Storing user data
+        localStorage.setItem('userToken', data.token); // Store token here, assuming it is part of the response
         navigate('/profile'); // Navigate to the profile page
       } else {
         alert(data.message || 'Invalid credentials');
@@ -32,6 +33,7 @@ function SignIn() {
       alert('An error occurred while signing in');
     }
   };
+
 
   return (
     <div className="signin-container">

@@ -1,9 +1,21 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css'; // Make sure you create a Navbar.css file in the same directory as your Navbar component
+import './Navbar.css'; // Ensure this CSS file is in your project directory
 
 const Navbar = () => {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleLogout = () => {
+        localStorage.clear(); // Clears all the user info from local storage
+        navigate('/'); // Redirects to the signin page
+    };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-custom">
             <div className="container-fluid">
@@ -35,6 +47,14 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item" style={{ marginLeft: '10px' }}>
                             <NavLink className="nav-link" to="/generate" activeClassName="active">Search</NavLink>
+                        </li>
+                        <li className="nav-item dropdown ms-auto"> {/* ms-auto will push the dropdown to the rightmost side */}
+                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onClick={toggleDropdown} data-bs-toggle="dropdown" aria-expanded={isDropdownOpen}>
+                                <img src="https://via.placeholder.com/30" alt="Avatar" style={{ height: '30px', borderRadius: '50%' }} /> {/* Placeholder image for avatar */}
+                            </a>
+                            <ul className={`dropdown-menu dropdown-menu-end ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="navbarDropdown">
+                                <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
