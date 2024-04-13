@@ -1,47 +1,90 @@
-/* SignIn.css */
 .signin-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: purple;
-  }
-  
-  .signin-box {
-    padding: 20px;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-  }
-  
-  .signin-box h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .signin-box form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .signin-box input {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .signin-button {
-    padding: 10px;
-    background-color: orange;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .signin-button:hover {
-    background-color: darkorange;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #9d50bb, #6e48aa); /* Gradient background */
+}
+
+.signin-box {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.signin-box h2 {
+  text-align: center;
+  color: #333;
+}
+
+.signin-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-box input {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.signin-button {
+  padding: 10px;
+  background-color: #5f2c82; /* A color that complements the gradient */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signin-button:hover {
+  background-color: #3c1d58; /* A darker shade for hover state */
+}
+
+.signup-option {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signup-link {
+  color: #5f2c82;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+
+/* Add the existing styles here */
+/* Add the styles for the password input container and the eye icon */
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.password-toggle-button:focus {
+  outline: none;
+}
+
+.password-toggle-button:hover {
+  color: #666;
+}
+
+.signin-box input[type="password"] {
+  padding-right: 40px; /* Make room for the eye icon */
+}
+/* Add the remaining styles */

@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignIn.css'; // Ensure this path is correct
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function SignIn() {
   const [studentId, setStudentId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
 
     try {
       const response = await fetch('http://localhost:8080/signin', {
@@ -46,13 +54,26 @@ function SignIn() {
             onChange={(e) => setStudentId(e.target.value)}
             placeholder="Student ID"
           />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
+          <div className="password-input-container">
+            <input
+              type={passwordShown ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+             <button 
+              type="button" 
+              onClick={togglePasswordVisibility} 
+              className="password-toggle-button"
+              aria-label="Toggle password visibility"
+            >
+              <FontAwesomeIcon icon={passwordShown ? faEyeSlash : faEye} />
+            </button>
+          </div>
           <button type="submit" className="signin-button">Sign In</button>
+          <p className="signup-option">
+            Don't have an account? <Link to="/signup" className="signup-link">Sign Up</Link>
+          </p>
         </form>
       </div>
     </div>
