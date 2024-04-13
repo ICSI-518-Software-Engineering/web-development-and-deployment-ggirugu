@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css'; // Ensure this CSS file is in your project directory
+import './Navbar.css'; // Import the custom CSS
 
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const navigate = useNavigate();
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        // Retrieve user data from local storage
+        const storedUserData = JSON.parse(localStorage.getItem('userData'));
+        if (storedUserData) {
+            setUserData(storedUserData);
+        }
+    }, []);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -36,25 +45,31 @@ const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
+                    <li className="nav-item">
                             <NavLink className="nav-link" to="/profile" activeClassName="active">Profile</NavLink>
                         </li>
-                        <li className="nav-item" style={{ marginLeft: '10px' }}>
+                        <li className="nav-item">
                             <NavLink className="nav-link" to="/addition" activeClassName="active">Addition</NavLink>
                         </li>
-                        <li className="nav-item" style={{ marginLeft: '10px' }}>
+                        <li className="nav-item">
                             <NavLink className="nav-link" to="/catalog" activeClassName="active">Catalog</NavLink>
                         </li>
-                        <li className="nav-item" style={{ marginLeft: '10px' }}>
+                        <li className="nav-item">
                             <NavLink className="nav-link" to="/generate" activeClassName="active">Search</NavLink>
                         </li>
-                        <li className="nav-item dropdown ms-auto"> {/* ms-auto will push the dropdown to the rightmost side */}
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onClick={toggleDropdown} data-bs-toggle="dropdown" aria-expanded={isDropdownOpen}>
-                                <img src="https://via.placeholder.com/30" alt="Avatar" style={{ height: '30px', borderRadius: '50%' }} /> {/* Placeholder image for avatar */}
+
+                        {/* other nav links */}
+                        {/* Dropdown menu for user details */}
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onClick={toggleDropdown} data-bs-toggle="dropdown" aria-expanded={isDropdownOpen.toString()}>
+                                <img src={userData.avatar || process.env.PUBLIC_URL + '/avatar.jpg'} alt="Avatar" style={{ height: '30px', borderRadius: '50%' }} />
                             </a>
-                            <ul className={`dropdown-menu dropdown-menu-end ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="navbarDropdown">
-                                <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
-                            </ul>
+                            <div className={`dropdown-menu dropdown-menu-right ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="navbarDropdown">
+                                <div className="dropdown-item"><span className="icon-placeholder">👤</span>Name: {userData.studentName}</div>
+                                <div className="dropdown-item"><span className="icon-placeholder">📧</span>Email: {userData.email}</div>
+                                <div className="dropdown-item"><span className="icon-placeholder">🆔</span>Student ID: {userData.studentId}</div>
+                                <div className="dropdown-item" onClick={handleLogout}><span className="icon-placeholder">🚪</span>Logout</div>
+                            </div>
                         </li>
                     </ul>
                 </div>

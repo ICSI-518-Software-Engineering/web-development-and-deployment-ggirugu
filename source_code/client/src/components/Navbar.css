@@ -1,50 +1,116 @@
+/* Navbar general styling */
 .navbar-custom {
     top: 0;
     z-index: 500;
     position: sticky;
-    background-color: #343a40;
-    /* Bootstrap's dark theme color */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Soft shadow for depth */
+    background-color: #343a40; /* Bootstrap's dark theme color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
+/* Navbar links and brand styling */
 .navbar-custom .navbar-brand {
     font-weight: bold;
-    color: #f8f9fa;
-    /* Light color for the brand text */
+    color: #f8f9fa; /* Light color for brand text */
 }
 
 .navbar-custom .nav-link {
-    color: #f8f9fa;
-    /* Light color for navigation links */
-    margin-right: 1rem;
-    /* Adds distance between navigation links */
-    transition: color 0.3s ease;
-    /* Transition for hover effect */
+    color: #f8f9fa; /* Light color for navigation links */
+    margin-right: 1rem; /* Adds distance between navigation links */
+    transition: color 0.3s ease; /* Smooth color transition for hover effect */
 }
 
-.navbar-custom .nav-link:hover {
-    color: #adb5bd;
-    /* A lighter grey on hover for a nice effect */
+.navbar-custom .nav-link:hover, .navbar-custom .nav-link:focus {
+    color: #adb5bd; /* Lighter grey on hover for a nice effect */
 }
 
+/* Navbar toggler styling */
 .navbar-custom .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.5);
-    /* Visible toggle button */
+    border-color: rgba(255, 255, 255, 0.5); /* Visible toggle button */
 }
 
 .navbar-custom .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* Adjust the nav items on smaller screens */
+/* Responsive adjustments for nav items on smaller screens */
 @media (max-width: 992px) {
     .navbar-custom .nav-item {
         margin: 0.5rem 0;
     }
 
     .navbar-custom .nav-link {
-        margin-right: 0;
-        /* Reset margin on smaller screens */
+        margin-right: 0; /* Reset margin on smaller screens */
     }
 }
+
+/* Full-width container to avoid alignment issues */
+.navbar-custom .container-fluid {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Flex container for navbar navigation items */
+.navbar-custom .navbar-nav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Aligns all nav items to the left */
+}
+
+/* Pushes the dropdown to the far right */
+.navbar-custom .navbar-nav .dropdown {
+    margin-left: auto; /* This will push the dropdown to the right */
+}
+
+
+
+/* Add some style for the placeholder icons */
+.icon-placeholder {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+/* Additional styling for dropdown items for better UX */
+.navbar-custom .dropdown-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+
+/* Fixes dropdown alignment issue when the navbar collapses */
+@media (max-width: 992px) {
+    .navbar-custom .dropdown-menu {
+        position: static; /* Makes dropdown expand the full width of the navbar */
+    }
+}
+/* Dropdown menu styling with a black gradient background */
+.navbar-custom .dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: auto;
+    border-radius: 0.25rem;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+    background: linear-gradient(135deg, #000000, #434343); /* Gradient from black to dark grey */
+    color: #ffffff; /* Light text color for readability */
+}
+
+/* Dropdown item styling with a hover effect */
+.navbar-custom .dropdown-item {
+    color: #ffffff;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-custom .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle highlight on hover */
+}
+
+/* Style for the placeholder icons (or actual icons) */
+.navbar-custom .dropdown-item .icon-placeholder {
+    margin-right: 0.5rem;
+}
+
+
