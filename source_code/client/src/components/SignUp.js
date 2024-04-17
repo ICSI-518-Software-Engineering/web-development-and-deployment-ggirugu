@@ -34,7 +34,7 @@ function SignUp() {
         }
 
         try {
-            const response = await fetch('http://localhost:8080/signup', {
+            const response = await fetch('http://ec2-54-91-110-84.compute-1.amazonaws.com:8080/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

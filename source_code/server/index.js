@@ -281,5 +281,5 @@ app.get("*", (req, res) => {
 
 app.listen(port, () => {
 
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on http://ec2-54-91-110-84.compute-1.amazonaws.com:${port}`);
 });
