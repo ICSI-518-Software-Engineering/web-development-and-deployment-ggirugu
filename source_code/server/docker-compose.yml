@@ -3,6 +3,8 @@ version: '3.8'
 services:
   mongo:
     image: mongo
+    ports:
+      - 27017:27017
     volumes:
       - mongo-data:/data/db
     restart: unless-stopped
@@ -12,7 +14,7 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017/catalog
     ports:
-      - "3000:8080"  # External port 3000 maps to internal 5000
+      - 8080:8080  # External port 3000 maps to internal 5000
     depends_on:
       - mongo
     restart: unless-stopped
@@ -20,7 +22,7 @@ services:
   caddy:
     image: caddy
     ports:
-      - "80:80"  # Expose HTTP on port 80
+      - 80:80 # Expose HTTP on port 80
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
     depends_on:
