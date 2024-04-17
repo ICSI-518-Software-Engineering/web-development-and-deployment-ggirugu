@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './SignUp.css'; // Make sure this path is correct
+import {Link, useNavigate } from 'react-router-dom';
+import './SignUp.css'; // Make sure this path is correc
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function SignUp() {
     const [studentName, setStudentName] = useState('');
@@ -14,6 +16,10 @@ function SignUp() {
     const isPasswordValid = (password) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
         return passwordRegex.test(password);
+    };
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
     };
 
     const handleSubmit = async (event) => {
@@ -67,10 +73,15 @@ function SignUp() {
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
                     <div className="password-input-container">
                         <input type={showPassword ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password-visibility">{showPassword ? 'Hide' : 'Show'}</button>
+                        <button type="button" onClick={toggleShowPassword} className="toggle-password-visibility">
+                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                        </button>
                     </div>
                     <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" required />
                     <button type="submit" className="signup-submit-button">Sign Up</button>
+                    <p className="signin-option">
+                        Already have an account? <Link to="/" className="signin-link">Sign In</Link>
+                    </p>
                 </form>
             </div>
         </div>

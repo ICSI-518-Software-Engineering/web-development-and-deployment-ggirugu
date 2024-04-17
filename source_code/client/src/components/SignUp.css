@@ -1,10 +1,10 @@
-/* SignUp.css */
+/* SignUp page styling based on your SignIn page aesthetics */
 .signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #9d50bb, #6e48aa); /* Gradient background */
 }
 
 .signup-box {
@@ -30,33 +30,62 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: #fff; /* Ensures input background is white */
 }
 
-.signup-box button {
+.signup-submit-button, .signin-button {
     padding: 10px;
-    background-color: blue;
+    background-color: #5f2c82; /* A color that complements the gradient */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.signup-box button:hover {
-    background-color: darkblue;
+.signup-submit-button:hover, .signin-button:hover {
+    background-color: #3c1d58; /* A darker shade for hover state */
 }
 
-/* SignUp.css */
-/* Existing styles... */
+/* Sign Up and Sign In link options styling */
+.signin-option, .signup-option {
+    text-align: center;
+    margin-top: 20px;
+}
 
+.signin-link, .signup-link {
+    color: #5f2c82;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signin-link:hover, .signup-link:hover {
+    text-decoration: underline;
+}
+
+/* Password visibility toggle button styling */
 .password-input-container {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .toggle-password-visibility {
     position: absolute;
     right: 10px;
-    top: 10px;
-    background: none;
     border: none;
+    background: none;
     cursor: pointer;
+    color: #5f2c82; /* Eye icon color to match the button */
+}
+
+.toggle-password-visibility:focus {
+    outline: none;
+}
+
+.toggle-password-visibility:hover {
+    color: #3c1d58; /* Darken the icon on hover for feedback */
+}
+
+.signup-box input[type="password"], .signup-box input[type="text"] {
+    padding-right: 40px; /* Make room for the eye icon inside the input */
 }
