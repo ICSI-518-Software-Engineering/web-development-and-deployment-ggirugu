@@ -22,7 +22,7 @@ const Catalog = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://ec2-54-242-35-201.compute-1.amazonaws.com:8080/products'); // Adjust the URL to match your backend API endpoint
+                const response = await axios.get('http://localhost:8080/products'); // Adjust the URL to match your backend API endpoint
                 setItems(response.data);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -36,7 +36,7 @@ const Catalog = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://ec2-54-242-35-201.compute-1.amazonaws.com:8080/products/${id}`);
+            await axios.delete(`http://localhost:8080/products/${id}`);
             setItems(items.filter(item => item._id !== id));
             setDeleteModalVisible(false);
             setSuccessMessage('Product deleted successfully.');
@@ -59,7 +59,7 @@ const Catalog = () => {
 
     const handleSave = async (id) => {
         try {
-            await axios.put(`http://ec2-54-242-35-201.compute-1.amazonaws.com:8080/product/${id}`, {
+            await axios.put(`http://localhost:8080/product/${id}`, {
                 name: tempItem.name,
                 quantity: tempItem.quantity,
                 price: tempItem.price
@@ -99,7 +99,7 @@ const Catalog = () => {
             const formData = new FormData();
             formData.append('image', e.target.files[0]);
             try {
-                const response = await axios.post('http://ec2-54-242-35-201.compute-1.amazonaws.com:8080/upload-image', formData, {
+                const response = await axios.post('http://localhost:8080/upload-image', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -118,7 +118,7 @@ const Catalog = () => {
     const handleAddProduct = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://ec2-54-242-35-201.compute-1.amazonaws.com:8080/add-product', newProduct);
+            const response = await axios.post('http://localhost:8080/add-product', newProduct);
             const addedProduct = response.data;
             setItems([...items, addedProduct]);
             setNewProduct({ name: '', quantity: '', price: '', imageUrl: null });
