@@ -7,7 +7,7 @@ Hello! My name is Giridhar Sai, and I am a Master's student in Computer Science 
 
 ## Project Overview
 
-This project is a React application built using the MERN stack (Express.js, React, Node.js). It showcases a comprehensive set of features that demonstrate my proficiency in full-stack development, including a responsive UI, robust backend services, and a seamless integration of the frontend and backend.
+This project is a React application built using the MERN stack deployement in Docker.(Express.js, React, Node.js). It showcases a comprehensive set of features that demonstrate my proficiency in full-stack development, including a responsive UI, robust backend services, and a seamless integration of the frontend and backend.
 
 ## Experience with ChatGPT
 
@@ -33,7 +33,7 @@ The ability to get immediate help on coding issues, UI enhancements, database se
 
 ## Deployment Details
 
-- **Web Address**:(http://ec2-54-91-110-84.compute-1.amazonaws.com:8080//)
+- **Web Address**:(http://ec2-54-91-110-84.compute-1.amazonaws.com:8080/)
 - **Port** : 8080
 - **IP Address of EC2 Instance**:54.242.35.201
 - **GitHub Repository**: https://github.com/ICSI-518-Software-Engineering/web-development-and-deployment-ggirugu
