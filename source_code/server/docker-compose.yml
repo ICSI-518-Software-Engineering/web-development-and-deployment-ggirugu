@@ -20,14 +20,19 @@ services:
     restart: unless-stopped
 
   caddy:
-    image: caddy
+    image: caddy:latest
+    restart: unless-stopped
     ports:
-      - 80:80 # Expose HTTP on port 80
+      - 80:80
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-    depends_on:
-      - app
-    restart: unless-stopped
+      - caddy_data:/data
+      - caddy_config:/config
 
 volumes:
   mongo-data:
+  caddy_data:
+  caddy_config:
+
+
+ 
