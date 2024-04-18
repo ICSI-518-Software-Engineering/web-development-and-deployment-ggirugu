@@ -14,7 +14,7 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017/catalog
     ports:
-      - 8080:8080  # External port 3000 maps to internal 5000
+      - 8080:8080  
     depends_on:
       - mongo
     restart: unless-stopped
