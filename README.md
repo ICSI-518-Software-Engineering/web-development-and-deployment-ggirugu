@@ -35,7 +35,7 @@ The ability to get immediate help on coding issues, UI enhancements, database se
 
 - **Web Address**:(http://ec2-54-91-110-84.compute-1.amazonaws.com:8080/)
 - **Port** : 8080
-- **IP Address of EC2 Instance**:54.242.35.201
+- **IP Address of EC2 Instance**:54.91.110.84
 - **GitHub Repository**: https://github.com/ICSI-518-Software-Engineering/web-development-and-deployment-ggirugu
   
 ## Steps to run in local 
