@@ -23,14 +23,16 @@ services:
     image: caddy:latest
     restart: unless-stopped
     ports:
-      - 80:80
+      - "80:80"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - caddy-data:/data
+      - caddy-config:/config
 
 volumes:
   mongo-data:
+  caddy-data:
+  caddy-config:
 
 
  
